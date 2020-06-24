@@ -1,7 +1,7 @@
 const ytdl = require('ytdl-core');
 
 export default async (req, res) => {
-  const {url, vname} = req.query;
-  res.header("Content-Disposition", `attachment; filename="${vname}.mp4`);
-  await ytdl(url, {format: 'mp4'}).pipe(res);
+  const {url, vname, itag, format} = req.query;
+  res.setHeader("Content-Disposition", `attachment; filename="${vname}.${format}`);
+  await ytdl(url, {itag, format}).pipe(res);
 }

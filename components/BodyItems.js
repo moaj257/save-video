@@ -6,7 +6,7 @@ export default class BodyItems extends React.Component {
   state = {
     url: '',
     isFetching: false,
-    vUrl: null,
+    vData: null,
     info: null,
   };
 
@@ -40,11 +40,11 @@ export default class BodyItems extends React.Component {
     formats.map(format => {
       const {itag, url, contentLength} = format;
       const cInfo = itags[itag];
-      const size = this.bytesToSize(contentLength);
-      cInfo && vFormats.push({...cInfo, url, size});
+      const size = contentLength && this.bytesToSize(contentLength) || 0;
+      cInfo && vFormats.push({...cInfo, url, size, itag});
     });
     const img = `https://i.ytimg.com/vi/${video_id}/hqdefault.jpg`;
-    this.setState({ isFetching: false, vUrl: vFormats[0].url, info: {description, title, time: this.secondsToHms(length_seconds), related_videos, video_id, video_url, img, formats: vFormats} });
+    this.setState({ isFetching: false, vData: `${vFormats[0].itag}_${vFormats[0].format}`, info: {description, title, time: this.secondsToHms(length_seconds), related_videos, video_id, video_url, img, formats: vFormats} });
   }
 
   handleDownload = () => {
@@ -55,7 +55,7 @@ export default class BodyItems extends React.Component {
   handleChange = ({target}) => this.setState({[target.name]: target.value});
 
   render() {
-    const {url, isFetching, info, vUrl} = this.state;
+    const {url, isFetching, info, vData} = this.state;
 
     return (
       <div className="body-items">
@@ -93,10 +93,10 @@ export default class BodyItems extends React.Component {
                 </div>
                 <div className="download-button">
                   <div className="formats">
-                    <a href={`${vUrl}`} target="_blank" style={{display: 'none'}} ref={'download'}>Download Url</a>
-                    <select className="formats-selector" name="vUrl" onChange={this.handleChange}>
+                    <a target="_blank" href={`/api/download?url=${info.video_url}&vname=${info.title}&itag=${vData && vData.split('_')[0]}&format=${vData && vData.split('_')[1]}`} style={{display: 'none'}} ref={'download'}>Download Url</a>
+                    <select className="formats-selector" name="vData" onChange={this.handleChange}>
                     {info.formats.map((format, i) => (
-                      <option className="format" value={format.url} key={`format-${i}`} selected={vUrl === format.url}>{`${format.type}${format.quality !== '-' ? `_${format.quality}` : ''}.${format.format} ${format.disp ? `(${format.disp})` : ''} (${format.size})`}</option>
+                      <option className="format" value={`${format.itag}_${format.format}`} key={`format-${i}`} selected={vData === `${format.itag}_${format.format}`}>{`${format.type}${format.quality !== '-' ? `_${format.quality}` : ''}.${format.format} ${format.disp ? `(${format.disp})` : ''} ${format.size ? `(${format.size})` : ''}`}</option>
                     ))}
                     </select>
                   </div>
