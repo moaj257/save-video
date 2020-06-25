@@ -15,13 +15,14 @@ app.prepare().then(() => {
 
   server.get('/api/info', async (req, res) => {
     const {url} = req.query;
-    await ytdl(url).on('info', info => res.json({ info }));
+    let info = await ytdl(url).on('info', info => res.json({ info }));
+    return {info};
   });
 
   server.get('/api/download', async (req, res) => {
     const {url, vname, itag, format} = req.query;
     res.setHeader("Content-Disposition", `attachment; filename="${vname}.${format}`);
-    await ytdl(url, {itag, format}).pipe(res);
+    return await ytdl(url, {itag, format}).pipe(res);
   });
 
   server.all('*', (req, res) => {
