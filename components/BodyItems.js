@@ -94,7 +94,7 @@ export default class BodyItems extends React.Component {
                 <div className="download-button">
                   <div className="formats">
                     <a target="_blank" href={`/api/download?url=${info.video_url}&vname=${info.title}&itag=${vData && vData.split('_')[0]}&format=${vData && vData.split('_')[1]}`} style={{display: 'none'}} ref={'download'}>Download Url</a>
-                    <select className="formats-selector" name="vData" onChange={this.handleChange}>
+                    <select className="formats-selector" name="vData" value={vData} onChange={this.handleChange}>
                     {info.formats.map((format, i) => (
                       <option className="format" value={`${format.itag}_${format.format}`} key={`format-${i}`} selected={vData === `${format.itag}_${format.format}`}>{`${format.type}${format.quality !== '-' ? `_${format.quality}` : ''}.${format.format} ${format.disp ? `(${format.disp})` : ''} ${format.size ? `(${format.size})` : ''}`}</option>
                     ))}
