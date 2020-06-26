@@ -4,6 +4,7 @@ import BodyItems from '../components/BodyItems';
 import Head from 'next/head';
 
 import '../assets/css/app.css';
+import Footer from '../components/Footer';
 
 export default class Home extends React.Component {
   render() {
@@ -17,6 +18,11 @@ export default class Home extends React.Component {
         <div className="container-wrapper">
           <Navigation />
           <BodyItems />
+        </div>
+        <div className="stick-footer">
+          <div className="container-wrapper">
+            <Footer />
+          </div>
         </div>
       </div>
     )
