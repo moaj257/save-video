@@ -66,7 +66,7 @@ export default class BodyItems extends React.Component {
           <div className="search-container">
             <div className="search-box">
               <div className="search">
-                <input type="text" className="search-input" name="url" value={url} onChange={this.handleChange} />
+                <input type="text" className="search-input" name="url" placeholder="https://www.youtube.com/watch?v=vZqzVoFU0QY" value={url} onChange={this.handleChange} />
               </div>
               <div className="search-button">
                 <button className="search-btn" onClick={this.handleFetch} disabled={isFetching}>{isFetching ? `Loading` : `Fetch`}</button>
