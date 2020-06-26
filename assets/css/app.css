@@ -44,8 +44,6 @@ a{text-decoration: none; color: inherit;}
 .download-button .download-btn{padding: 15px 25px; margin-left: 10px; flex: 1;}
 .formats-selector{padding: 14px 10px; font-size: 18px; background-color: #eee; color: #000; border: 2px solid #ccc; width: 100%;}
 
-/* .formats{position: absolute; top: 0; background: #fff; width: 100%; border: 1px solid; box-shadow: 0px 0px 15px #ccc; border-radius: 15px;} */
-
 @media (max-width: 767px){
     .search-box, .download-item, .video-desc, .download-button{flex-direction: column; align-items: center;}
     .search-box .search, .search-box .search-button, .search-box, .video-desc, .download-button, .video-thumbnail img, .formats, .video-desc, .video-data, .download-button .download-btn{width: 100%;}
