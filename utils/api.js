@@ -1,7 +1,7 @@
 import axios from 'axios';
 // const apiUrl = 'https://save-video.vercel.app/api';
-// const apiUrl = 'https://save-video.herokuapp.com/api';
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'https://save-video.herokuapp.com/api';
+// const apiUrl = 'http://localhost:3000/api';
 
 const api = axios.create({
     baseURL: `${apiUrl}`,
